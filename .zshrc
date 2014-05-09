@@ -54,7 +54,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -72,3 +72,66 @@ export PATH="/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+
+# pip should only run if there is a virtualenv currently activated
+export PIP_REQUIRE_VIRTUALENV=true
+# cache pip-installed packages to avoid re-downloading
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+
+syspip(){
+   PIP_REQUIRE_VIRTUALENV="" pip "$@"
+}
+
+syspip3(){
+   PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
+}
+
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+alias nginx.start='sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
+alias nginx.stop='sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
+alias nginx.restart='nginx.stop && nginx.start'
+alias php-fpm.start="launchctl load -w ~/Library/LaunchAgents/homebrew-php.josegonzalez.php55.plist"
+alias php-fpm.stop="launchctl unload -w ~/Library/LaunchAgents/homebrew-php.josegonzalez.php55.plist"
+alias php-fpm.restart='php-fpm.stop && php-fpm.start'
+alias mysql.start="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+alias mysql.stop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+alias mysql.restart='mysql.stop && mysql.start'
+alias nginx.logs.error='tail -250f /usr/local/etc/nginx/logs/error.log'
+alias nginx.logs.access='tail -250f /usr/local/etc/nginx/logs/access.log'
+alias nginx.logs.default.access='tail -250f /usr/local/etc/nginx/logs/default.access.log'
+alias nginx.logs.default-ssl.access='tail -250f /usr/local/etc/nginx/logs/default-ssl.access.log'
+alias nginx.logs.phpmyadmin.error='tail -250f /usr/local/etc/nginx/logs/phpmyadmin.error.log'
+alias nginx.logs.phpmyadmin.access='tail -250f /usr/local/etc/nginx/logs/phpmyadmin.access.log'
+
+# Remote Mount (sshfs)
+# creates mount folder and mounts the remote filesystem
+rmount() {
+    local host folder mname
+    host="${1%%:*}:"
+    [[ ${1%:} == ${host%%:*} ]] && folder='' || folder=${1##*:}
+    if [[ -n $2 ]]; then
+        mname=$2
+    else
+        mname=${folder##*/}
+        [[ "$mname" == "" ]] && mname=${host%%:*}
+    fi
+    if [[ $(grep -i "host ${host%%:*}" ~/.ssh/config) != '' ]]; then
+        mkdir -p ~/mounts/$mname > /dev/null
+        sshfs $host$folder ~/mounts/$mname -oauto_cache,reconnect,defer_permissions,negative_vncache,volname=$mname,noappledouble && echo "mounted ~/mounts/$mname"
+    else
+        echo "No entry found for ${host%%:*}"
+        return 1
+    fi
+}
+
+# export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
+
+PHP_AUTOCONF="/usr/local/bin/autoconf"
+
+source ~/perl5/perlbrew/etc/bashrc
+
+alias sml='rlwrap /usr/local/bin/sml'
