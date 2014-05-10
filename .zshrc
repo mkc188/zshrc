@@ -135,3 +135,5 @@ PHP_AUTOCONF="/usr/local/bin/autoconf"
 source ~/perl5/perlbrew/etc/bashrc
 
 alias sml='rlwrap /usr/local/bin/sml'
+
+export EDITOR='vim'
