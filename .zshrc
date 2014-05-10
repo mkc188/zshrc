@@ -77,3 +77,5 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
 alias tmux="TERM=screen-256color-bce tmux"
+
+export EDITOR='vim'
