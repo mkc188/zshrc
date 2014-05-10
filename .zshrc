@@ -72,3 +72,5 @@ export PATH="/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+export EDITOR='vim'
