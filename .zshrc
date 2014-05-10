@@ -50,11 +50,13 @@ ZSH_THEME="geoffgarside"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
 
+fpath=(/usr/local/share/zsh-completions $fpath)
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin:/bin:/usr/local/games:/usr/games:$HOME/bin"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin:/bin:$HOME/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -88,8 +90,6 @@ syspip(){
 syspip3(){
    PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
 }
-
-fpath=(/usr/local/share/zsh-completions $fpath)
 
 alias nginx.start='sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
 alias nginx.stop='sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
