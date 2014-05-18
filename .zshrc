@@ -137,3 +137,4 @@ source ~/perl5/perlbrew/etc/bashrc
 alias sml='rlwrap /usr/local/bin/sml'
 
 export EDITOR='vim'
+export TERM="xterm-256color"
