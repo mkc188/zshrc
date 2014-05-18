@@ -77,3 +77,4 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 
 export EDITOR='vim'
+export TERM="xterm-256color"
