@@ -56,7 +56,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin:/bin:$HOME/bin"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/sbin:/usr/bin:/bin:$HOME/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -127,8 +127,6 @@ rmount() {
         return 1
     fi
 }
-
-# export PATH="$(brew --prefix josegonzalez/php/php55)/bin:$PATH"
 
 PHP_AUTOCONF="/usr/local/bin/autoconf"
 
