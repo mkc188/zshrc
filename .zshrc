@@ -136,3 +136,5 @@ alias sml='rlwrap /usr/local/bin/sml'
 
 export EDITOR='vim'
 export TERM="xterm-256color"
+
+export PATH=/usr/texbin:"$PATH"
