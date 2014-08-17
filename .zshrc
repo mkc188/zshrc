@@ -78,3 +78,8 @@ source /usr/local/share/chruby/auto.sh
 
 export EDITOR='vim'
 export TERM="xterm-256color"
+
+export GPGKEY=97CDEA34
+
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export LD_LIBRARY_PATH="$HOME/.linuxbrew/lib:$LD_LIBRARY_PATH"
